@@ -1,5 +1,6 @@
 basepath=$(pwd)
 export PUBSUB_LOG_PATH=$HOME/work/github/myworld/log/
+export GLSL_PATH=$HOME/work/github/myworld/glsl/
 export LOG_LEVEL=0
 echo $basepath
 export BIN_PATH=$HOME/work/github/myworld/bin
