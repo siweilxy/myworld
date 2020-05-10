@@ -1,10 +1,9 @@
 basepath=$(pwd)
-
+export PUBSUB_LOG_PATH=$HOME/work/github/myworld/log/
+export LOG_LEVEL=0
 echo $basepath
 export BIN_PATH=$HOME/work/github/myworld/bin
 export PATH=$PATH:$HOME/work/github/myworld/bin
-export BIN_PATH=$HOME/work/github/myworld/bin
-export LOG_LEVEL=3
 export LD_LIBRARY_PATH=$HOME/work/github/myworld/lib:$HOME/github/myworld/3rdparty/lib:/usr/local/lib
 #0 INFO
 #1 WARNING

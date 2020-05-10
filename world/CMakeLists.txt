@@ -23,6 +23,7 @@ add_definitions("-g")
 FILE(GLOB_RECURSE all_files
         *.cpp
         *.cc
+        *.hpp
         )
 
 link_directories("$ENV{HOME}/work/github/myworld/lib/")
@@ -31,9 +32,9 @@ source_group(all_files)
 include_directories($ENV{HOME}/work/github/myworld/include/)
 include_directories($ENV{HOME}/work/github/myworld/3rdparty/include/)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a")
-add_executable(world world.cpp)
+add_executable(world ${all_files})
 
-target_link_libraries(world GL GLU glut)
+target_link_libraries(world GL GLU glfw3 pthread dl GLEW glog)
 
 
 
