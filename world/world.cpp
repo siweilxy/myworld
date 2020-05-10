@@ -8,6 +8,9 @@
 
 #define numVAOs 1
 
+float x =0.0f;
+float inc = 0.01f;
+
 GLuint renderingProgram;
 GLuint vao[numVAOs];
 
@@ -15,10 +18,6 @@ std::string path="";
 
 GLuint createShaderProgram ()
 {
-    // const char *vs= "#version 430 \n void main(void) \n {gl_Position = vec4(0,0,0,1);}";
-    //const char *fs = "#version 430 \n out vec4 color; \n void main(void) \n {if (gl_FragCoord.x < 200) color = vec4(1,0,0,1);else color=vec4(0,0,1,1);}";
-    //const char *fs = "#version 430 \n out vec4 color; \n void main(void) \n { color = vec4(0,0,1,1);}";
-
     std::string vShaderStr = readShaderSource ((path + "vertShader.glsl").c_str());
     std::string fragShaderStr = readShaderSource ((path + "fragShader.glsl").c_str());
     const char *vs = vShaderStr.c_str ();
@@ -71,9 +70,25 @@ void init (GLFWwindow *window)
 
 void display (GLFWwindow *window, double currentTime)
 {
+    glClear(GL_DEPTH_BUFFER_BIT);
+    glClearColor(0,0,0,1);
+    glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram (renderingProgram);
-    glDrawArrays (GL_POINTS, 0, 1);
-    glPointSize (30);
+    x+=inc;
+    if(x > 1.0f)
+    {
+        inc = -0.01f;
+    }
+
+    if(x<-1.0f)
+    {
+        inc = 0.01f;
+    }
+
+    GLuint offsetLoc = glGetUniformLocation(renderingProgram,"offset");//获取glsl里的offset项
+    glProgramUniform1f(renderingProgram,offsetLoc,x);
+    glDrawArrays (GL_TRIANGLES, 0, 3);
+    //glPointSize (30);
 }
 
 int main (int argc, char *argv[])
